@@ -1,0 +1,15 @@
+{
+  "@sapui5/generator-sapui5-templates": {
+    "promptValues": {
+      "ApplicationTitle": "FioriBAS",
+      "ApplicationDescription": "",
+      "ApplicationComponentHierarchy": "",
+      "FLP": true,
+      "ObjectCollection": "Products",
+      "ObjectCollection_Key": "Id",
+      "Object_Identifier": "Name",
+      "Object_Number": "DimensionDepth",
+      "Object_UnitOfMeasure": "DimensionUnit"
+    }
+  }
+}

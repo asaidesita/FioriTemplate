@@ -1,0 +1,54 @@
+_schema-version: "3.2"
+ID: fioriSample11
+version: 0.0.1
+modules:
+- name: fiorisample11-approuter
+  type: approuter.nodejs
+  path: fiorisample11-approuter
+  requires:
+  - name: fioriSample11_html_repo_runtime
+  - name: dest_fioriSample11
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: fioriSample11_ui_deployer
+  type: com.sap.html5.application-content
+  path: fioriSample11_ui_deployer
+  requires:
+  - name: fioriSample11_html_repo_host
+  build-parameters:
+    requires:
+    - artifacts:
+      - ./*
+      name: HTML5Module
+      target-path: resources/HTML5Module
+- name: HTML5Module
+  type: html5
+  path: HTML5Module
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+resources:
+- name: fioriSample11_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: fioriSample11_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: dest_fioriSample11
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-plan: lite
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install
